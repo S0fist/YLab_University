@@ -8,7 +8,7 @@ def bananas(s):
         for i in compound:
             a[i] = "-"
         amalgamation = "".join(a)
-        if amalgamation.replace("-", " ") == "banana":
+        if amalgamation.replace("-", "") == "banana":
             result.add(amalgamation)
-
     return result
+
