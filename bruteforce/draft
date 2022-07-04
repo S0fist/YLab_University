@@ -4,7 +4,7 @@ import re
 from os import path
 
 V = 6
-inputPath = path.relpath('bruteforce/input.txt')
+inputPath = path.relpath('.../../input.txt')
 
 
 def travellingSalesmanProblem(graph, s):
@@ -51,7 +51,7 @@ def openInput(fin):
 
 def matrixCore():
     shos = []
-    lop = openInput(open(inputpath, 'r', encoding="utf-8"))
+    lop = openInput(open(inputPath, 'r', encoding="utf-8"))
     for lop in lop:
         match = re.search(r'\d, \d', lop)
         shos.append(match.group().split(', '))
@@ -78,7 +78,7 @@ if __name__ == "__main__":
         if type(i) == float:
             print("Минимальный путь: ", i)
         else:
-            k = openInput(open(inputpath, 'r', encoding="utf-8"))
+            k = openInput(open(inputPath, 'r', encoding="utf-8"))
             print(k[0], "->", end=' ')
             for j in i:
                 c += graph[j - 1][j]
