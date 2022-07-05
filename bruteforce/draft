@@ -3,84 +3,81 @@ from itertools import permutations
 import re
 from os import path
 
-V = 6
+"""МЕНЯТЬ ПРИ ИЗМЕНЕНИИ ПУТИ"""
 inputPath = path.relpath('.../../input.txt')
 
 
+# Просчитывание всех возможных путей(Гамильтонов путь и brute force)
 def travellingSalesmanProblem(graph, s):
-    # store all vertex apart from source vertex
     vertex = []
     pathlist = []
     for i in range(V):
         if i != s:
             vertex.append(i)
 
-    # store minimum weight Hamiltonian Cycle
     min_path = maxsize
     next_permutation = permutations(vertex)
-    for i in next_permutation:
-
-        # store current Path weight(cost)
+    for q in next_permutation:
         current_pathweight = 0
-
-        k = s
-        for j in i:
-            print(k, "->", j)
-            current_pathweight += graph[k][j]
-            print(current_pathweight)
-            k = j
-        current_pathweight += graph[k][s]
-        print(current_pathweight, '\n')
+        w = s
+        for j in q:
+            current_pathweight += graph[w][j]
+            w = j
+        current_pathweight += graph[w][s]
         min_path = min(min_path, current_pathweight)
         if current_pathweight == min_path:
-            pathlist.append(i)
-    return min_path, pathlist[-2]
+            pathlist.append(q)
+    return pathlist[-1], min_path
 
-def openInput(fin):
-    lop = []
+
+# Вывод необходимых строк из input.txt
+def open_input(fin):
     loi = fin.readlines()
     los = []
     fin.close()
     for loi in loi:
-        match = re.search(r'\d, \d', loi)
-        rematch = re.search(r'\(\d, \d\)', loi)
-        lop.append(match.group().split(', '))
-        los.append(rematch.group())
+        match = re.search(r'\((\d)+, (\d)+\)', loi)
+        los.append(match.group())
     return los
 
 
-def matrixCore():
-    shos = []
-    lop = openInput(open(inputPath, 'r', encoding="utf-8"))
+# Кол-во вершин в графе
+V = len(open_input(open(inputPath, 'r', encoding="utf-8")))
+
+
+# Получение всех возможных расстояний между точками
+def get_list():
+    d_list = []
+    lop = open_input(open(inputPath, 'r', encoding="utf-8"))
     for lop in lop:
-        match = re.search(r'\d, \d', lop)
-        shos.append(match.group().split(', '))
+        match = re.search(r'(\d)+, (\d)+', lop)
+        d_list.append(match.group().split(', '))
     matrix_list = []
     spis = []
-    count = 0
-    for x1, y1 in shos:
-        for x2, y2 in shos:
+    for x1, y1 in d_list:
+        for x2, y2 in d_list:
             a = ((int(x2) - int(x1)) ** 2 + (int(y2) - int(y1)) ** 2) ** 0.5
             matrix_list.append(a)
             if len(matrix_list) == V:
                 spis.append(matrix_list[::])
                 matrix_list.clear()
-            count += 1
     return spis
 
+
+# Вывод
 if __name__ == "__main__":
-    graph = matrixCore()
+    graph = get_list()
     s = 0
     c = 0
-    # print(travellingSalesmanProblem(graph, s))
-
     for i in travellingSalesmanProblem(graph, s):
-        if type(i) == float:
-            print("Минимальный путь: ", i)
-        else:
-            k = openInput(open(inputPath, 'r', encoding="utf-8"))
+        if type(i) == tuple:
+            k = open_input(open(inputPath, 'r', encoding="utf-8"))
             print(k[0], "->", end=' ')
+            p = 0
             for j in i:
-                c += graph[j - 1][j]
-                print(f'{k[j]}: {c} ->', end=' ')
-            print(k[0])
+                c += graph[p][j]
+                print(f'{k[j]}:{[c]} -> ', end='')
+                p = j
+            print(k[0], "= ", end='')
+        else:
+            print(f'{i}')
