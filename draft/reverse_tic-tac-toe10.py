@@ -27,7 +27,7 @@ def loser(lit):
                 return True
     for y in range(6):  # check verticals
         for x in range(10):
-            if all([board[y - i][x] == lit for i in range(5)]):
+            if all([board[y + i][x] == lit for i in range(5)]):
                 return True
     return False
 
