@@ -8,6 +8,7 @@ class Movie:
     title: str
     dates: List[Tuple[datetime, datetime]]
 
+    # Создаёт list от начального значения до конечного.
     def schedule(self) -> Generator[datetime, None, None]:
         c = self.dates
         s = []
@@ -19,6 +20,7 @@ class Movie:
                 first_date += timedelta(days=1)
                 s.append(first_date)
         return s
+
 
 if __name__ == "__main__":
     m = Movie('sw', [
