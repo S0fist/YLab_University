@@ -9,10 +9,10 @@ class CyclicIterator:
         return self
 
     def __next__(self):
-        for i in self.iterable:
-            return i
+        for r in self.iterable:
+            return r
 
-
-cyclic_iterator = CyclicIterator(range(3))
+if __name__ == "__main__":
+    cyclic_iterator = CyclicIterator(range(3))
 for i in cyclic_iterator:
     print(i)
