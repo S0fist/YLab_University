@@ -2,6 +2,7 @@ import time
 import math
 
 
+# Декоратор для повтороного запуска функции.
 def waiting(call_count: int, start_sleep_time: int, factor: int, border_sleep_time: int):
     def decorator(func):
         print(f'Кол-во запусков = {call_count}')
