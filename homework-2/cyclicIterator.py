@@ -16,5 +16,5 @@ class CyclicIterator:
 
 if __name__ == "__main__":
     cyclic_iterator = CyclicIterator(range(3))
-for i in cyclic_iterator:
-    print(i)
+    for i in cyclic_iterator:
+        print(i)

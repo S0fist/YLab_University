@@ -1,14 +1,17 @@
 # Запоминает и выводит значения.
 def memoize(function):
-  memo = {}
-  def wrapper(*args):
-    if args in memo:
-      return f'{memo[args]} кэш'
-    else:
-      rv = function(*args)
-      memo[args] = rv
-      return f'{rv} запись в кэш'
-  return wrapper
+    memo = {}
+
+    def wrapper(*args):
+        if args in memo:
+            return f'{memo[args]} кэш'
+        else:
+            rv = function(*args)
+            memo[args] = rv
+            return f'{rv} запись в кэш'
+
+    return wrapper
+
 
 @memoize
 def multiplier(number: int):
