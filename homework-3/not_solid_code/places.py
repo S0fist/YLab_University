@@ -23,22 +23,23 @@ class Tokyo(Place):
 
 class Planet(ABC):
     @abstractmethod
-    def anouncment(self):
+    def announcment(self):
         print("Calling planets")
 
 
 class Earth(Planet):
     coordinates = [159.34523153, 101.43526561123]
 
-    def anouncment(self):
+    def announcment(self):
         print("Earth if safe!")
 
 
 class Mars(Planet):
     coordinates = [120.3645673153, 56.4532254121123]
 
-    def anouncment(self):
+    def announcment(self):
         print("Mars if safe!")
+
 
 class MediaTV:
 
@@ -47,4 +48,4 @@ class MediaTV:
         hero_name = getattr(hero, 'name')
         print(f'{hero_name} saved the {place_name}!')
         if isinstance(planet, Planet):
-            planet.anouncment()
+            planet.announcment()
